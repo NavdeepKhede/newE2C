@@ -254,8 +254,6 @@ const Document = () => {
   if (!isLoggedIn) {
     return <Navigate to="/auth/login" />;
   }
-
-  // const items = [
   //   {
   //     label: <TabHeading index="0" />,
   //     key: "0",

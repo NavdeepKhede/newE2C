@@ -16,7 +16,7 @@ import Logo from "../../assets/Images/logoV3.png";
 import { Nav_Buttons, Profile_Menu } from "../../data";
 import { Gear } from "phosphor-react";
 import { faker } from "@faker-js/faker";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { UpdateSidebarTab } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "../../redux/slices/auth";
@@ -86,13 +86,14 @@ const SideBar = () => {
   }, [sidebarTab]);
 
   const handleMenu0 = () => {
-    console.log("hii handle 0")
+    console.log("hii handle 0");
   };
   const handleMenu1 = () => {
-    console.log("hii handle 1")
+    console.log("hii handle 1");
   };
   const handleMenu2 = () => {
     dispatch(LogoutUser());
+    <Navigate to="/home" />;
   };
 
   const getMenuFunction = (index) => {

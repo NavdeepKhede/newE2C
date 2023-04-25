@@ -24,6 +24,8 @@ const slice = createSlice({
       state.isLoggedIn = false;
       state.token = "";
       state.studentId = "";
+      state.registrationStatus = false;
+      state.baseDocuments = [];
     },
     updateIsLoading(state, action) {
       state.error = action.payload.error;
@@ -160,6 +162,8 @@ export function UploadDocument(title, url) {
             message: response.data.message,
           })
         );
+
+        dispatch(GetBaseDocs())
       })
       .catch(function (error) {
         console.log(error);

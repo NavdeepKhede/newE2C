@@ -388,7 +388,7 @@ const EnrollmentForm = () => {
 
   const onSubmit = async (data) => {
     let picUrl = "";
-    console.log(data.picture);
+
     if (data.picture) {
       const storageRef = ref(storage, `/files/${data.picture}`);
       const uploadTask = uploadBytesResumable(storageRef, data.picture);
@@ -412,7 +412,6 @@ const EnrollmentForm = () => {
     }
     try {
       // submit data to backend
-      console.log(data);
       const refined_Data = {
         officialDetails: {
           programName: data.programName,
@@ -532,11 +531,6 @@ const EnrollmentForm = () => {
     }
   };
 
-  //   const [pictureFile, setPictureFile] = useState(null);
-
-  //   const handlePictureChange = (event) => {
-  //     setPictureFile(event.target.files[0]);
-  //   };
 
   return (
     <Paper
@@ -572,7 +566,6 @@ const EnrollmentForm = () => {
                 type="file"
                 label=""
                 inputProps={{ accept: "image/*" }}
-                // onChange={handlePictureChange}
               />
             </Stack>
           </Stack>
