@@ -19,6 +19,7 @@ import { faker } from "@faker-js/faker";
 import { useNavigate } from "react-router-dom";
 import { UpdateSidebarTab } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
+import { LogoutUser } from "../../redux/slices/auth";
 
 const getPath = (index) => {
   switch (index) {
@@ -74,6 +75,7 @@ const SideBar = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
+    console.log(anchorEl);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -82,6 +84,29 @@ const SideBar = () => {
   useEffect(() => {
     setSelected(sidebarTab);
   }, [sidebarTab]);
+
+  const handleMenu0 = () => {
+    console.log("hii handle 0")
+  };
+  const handleMenu1 = () => {
+    console.log("hii handle 1")
+  };
+  const handleMenu2 = () => {
+    dispatch(LogoutUser());
+  };
+
+  const getMenuFunction = (index) => {
+    switch (index) {
+      case 0:
+        return handleMenu0();
+      case 1:
+        return handleMenu1();
+      case 2:
+        return handleMenu2();
+      default:
+        break;
+    }
+  };
 
   return (
     <Box
@@ -218,7 +243,12 @@ const SideBar = () => {
           >
             <Stack spacing={1} px={1}>
               {Profile_Menu.map((el, idx) => (
-                <MenuItem key={idx} onClick={handleClick}>
+                <MenuItem
+                  key={idx}
+                  onClick={() => {
+                    getMenuFunction(idx);
+                  }}
+                >
                   <Stack
                     sx={{ width: 100 }}
                     direction="row"

@@ -52,6 +52,7 @@ export const uploadDoc = async (req, res) => {
     });
 
     const document = await newDoc.save();
+    
     res.status(201).json({
       status: "success",
       message: "Document saved successfully!",
