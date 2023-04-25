@@ -83,6 +83,8 @@ export function LoginStudent(formValues) {
         dispatch(
           showSnackbar({ severity: "success", message: response.data.message })
         );
+
+        dispatch(GetBaseDocs());
       })
       .catch(function (error) {
         console.log(error);
@@ -124,6 +126,8 @@ export function PatchStudent(formValues) {
             message: response.data.message,
           })
         );
+
+        dispatch(GetBaseDocs())
       })
       .catch(function (error) {
         console.log(error);
