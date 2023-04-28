@@ -1,13 +1,7 @@
 import mongoose from 'mongoose';
 
 const UserSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
-        min:2,
-        max: 50,
-    },
-    email: {
+    applicationId: {
         type: String,
         required: true,
         unique: true,
@@ -20,18 +14,9 @@ const UserSchema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        enum: ['student', 'admin'],
-        default: 'student',
+        enum: ['helper', 'admin'],
+        default: 'admin',
     },
-    documents: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Document'
-    }],
-    picture: {
-        type: String,
-        required: true,
-    },
-
 }, { timestamps: true });
 
 const User = mongoose.model("User", UserSchema);

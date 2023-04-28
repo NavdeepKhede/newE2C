@@ -28,36 +28,48 @@ export const register = async (req, res) => {
   }
 };
 
-/* LOGIN USER */
-// export const Login = async (req, res) => {
-//   try {
-//     const { email, password } = req.body;
-//     if (!email || !password)
-//       return res.status(400).json({ msg: "Email and password required!" });
+/* LOGIN ADMIN */
+export const loginAdmin = async (req, res) => {
+  try {
+    const { applicationId, password } = req.body;
+    if (!applicationId || !password)
+      return res
+        .status(400)
+        .json({ msg: "applicationId and password required!" });
 
-//     const user = await User.findOne({ email: email });
-//     if (!user) return res.status(400).json({ msg: "User doesn't exist." });
+    const user = await User.findOne({ applicationId: applicationId });
+    if (!user)
+      return res
+        .status(400)
+        .json({ status: "error", message: "User doesn't exist." });
 
-//     const isMatch = await bcrypt.compare(password, user.password);
-//     if (!isMatch) return res.status(401).json({ msg: "Invalid credentials." });
+    const isMatch = password === user.password;
+    if (!isMatch)
+      return res
+        .status(401)
+        .json({ status: "error", message: "Invalid credentials." });
 
-//     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
-//     user.password = undefined;
-//     res
-//       .cookie("access_token", token, {
-//         httpOnly: true,
-//         expires: new Date(Date.now() + 3600000),
-//       })
-//       .status(200)
-//       .json(user);
-//   } catch (error) {
-//     res.status(500).json({ error: error.message });
-//   }
-// };
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    user.password = undefined;
 
+    res.status(200).json({
+      status: "success",
+      message: "Logged In successfully",
+      token,
+      data: user,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
+
+/* LOGIN STUDENT */
 export const login = async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const { applicationId, dob } = req.body;
     if (!applicationId || !dob)
       return res.status(400).json({ msg: "Credentials required!" });
@@ -67,10 +79,11 @@ export const login = async (req, res) => {
       "loginDetails.dob": dob,
     });
 
-    if (!student) return res.status(400).json({
-      status: "error",
-      message: "Student doesn't exist!",
-    });
+    if (!student)
+      return res.status(400).json({
+        status: "error",
+        message: "Student doesn't exist!",
+      });
 
     const filtered_student = {
       user_id: student._id,

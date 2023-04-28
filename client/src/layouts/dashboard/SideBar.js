@@ -39,20 +39,20 @@ const getPath = (index) => {
   }
 };
 
-const getMenuPath = (index) => {
-  switch (index) {
-    case 0:
-      return "/profile";
-    case 1:
-      return "/settings";
-    case 2:
-      // Update token & set isAuthenticated to false
-      return "/auth/login";
+// const getMenuPath = (index) => {
+//   switch (index) {
+//     case 0:
+//       return "/profile";
+//     case 1:
+//       return "/settings";
+//     case 2:
+//       // Update token & set isAuthenticated to false
+//       return "/auth/login";
 
-    default:
-      break;
-  }
-};
+//     default:
+//       break;
+//   }
+// };
 
 const SideBar = () => {
   const dispatch = useDispatch();

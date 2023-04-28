@@ -23,7 +23,9 @@ export const getStudentDetails = async (req, res) => {
 
 export const getStudents = async (req, res) => {
   try {
-    const students = await Student.find();
+    const students = await Student.find().select(
+      "_id officialDetails personalDetails parentsDetails academicDetails documents registrationStatus verified"
+    );
 
     res.status(200).json({
       status: "success",
@@ -63,7 +65,34 @@ export const getStudent = async (req, res) => {
       data: filtered_student,
     });
   } catch (error) {
-    res.status(404).json({
+    res.status(500).json({
+      status: "error",
+      message: error.message,
+    });
+  }
+};
+
+export const verifyStudent = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const student = await Student.findById(id);
+
+    if (!student)
+      return res.status(404).json({
+        status: "error",
+        message: "Student doesn't exist!",
+      });
+
+    student.verified = true;
+
+    student.save();
+
+    res.status(201).json({
+      status: "success",
+      message: "Student Verified successfully!",
+    });
+  } catch (error) {
+    res.status(500).json({
       status: "error",
       message: error.message,
     });
@@ -88,15 +117,16 @@ export const updateDetails = async (req, res) => {
     });
 
     updated_student.registrationStatus = true;
+    updated_student.verified = false;
     updated_student.save();
 
-    res.status(200).json({
+    res.status(201).json({
       status: "success",
       data: updated_student,
       message: "Student Updated Successfully!",
     });
   } catch (error) {
-    res.status(404).json({
+    res.status(500).json({
       status: "error",
       message: error.message,
     });

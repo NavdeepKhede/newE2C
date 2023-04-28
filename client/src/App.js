@@ -6,7 +6,7 @@ import ThemeProvider from "./theme";
 import ThemeSettings from "./components/settings";
 
 import { Alert as MuiAlert, Snackbar } from "@mui/material";
-import { forwardRef, useState } from "react";
+import { forwardRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closeSnackbar } from "./redux/slices/app";
 
@@ -22,16 +22,6 @@ function App() {
   const { open, message, severity } = useSelector(
     (state) => state.app.snackbar
   );
-
-  // const registrationStatus = useSelector(
-  //   (state) => state.auth.registrationStatus
-  // );
-
-  // const [warningMsg, setWarningMsg] = useState(true);
-
-  // const handleCloseWarningMsg = () => {
-  //   setWarningMsg(false);
-  // }
 
   return (
     <>
@@ -65,26 +55,6 @@ function App() {
       ) : (
         <></>
       )}
-      {/* {!registrationStatus && (
-        <Snackbar
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
-          open={warningMsg}
-          key={vertical + horizontal + vertical}
-          onClose={() => {
-            handleCloseWarningMsg();
-          }}
-        >
-          <Alert
-            onClose={() => {
-              handleCloseWarningMsg();
-            }}
-            severity='error'
-            sx={{ width: "100%" }}
-          >
-            Please navigate to Complete "Enrollment Form" in next Tab in Sidebar !
-          </Alert>
-        </Snackbar>
-      )} */}
     </>
   );
 }

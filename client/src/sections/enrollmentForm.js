@@ -355,6 +355,7 @@ const EnrollmentForm = () => {
     mDesignation: "",
     mPhone: "",
     mEmail: "",
+    fmAddress: "",
     guardianName: "",
     gPhone: "",
     gRelation: "",

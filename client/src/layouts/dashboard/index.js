@@ -1,14 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Stack } from "@mui/material";
-import { Navigate, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 
 import SideBar from "./SideBar";
-import { useDispatch, useSelector } from "react-redux";
 
 
 const DashboardLayout = () => {
-  const dispatch = useDispatch();
-
   // const { isLoggedIn } = useSelector((state) => state.auth);
 
 
