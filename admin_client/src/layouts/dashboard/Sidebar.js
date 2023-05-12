@@ -7,7 +7,7 @@ import {
   useTheme,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { Funnel, House, SignOut } from "phosphor-react";
+import { FilePdf, Funnel, House, SignOut } from "phosphor-react";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "../../redux/slices/auth";
 
@@ -21,13 +21,9 @@ const getPath = (index) => {
     case 0:
       return "/home";
     case 1:
-      return "/enrollment";
+      return "/generate_pdf";
     case 2:
-      return "/contact";
-    case 3:
-      return "/q&a";
-    case 4:
-      return "/settings";
+      return "/query";
 
     default:
       break;
@@ -42,6 +38,11 @@ const Nav_Buttons = [
   },
   {
     index: 1,
+    icon: <FilePdf size={26} />,
+    title: "Generate PDF",
+  },
+  {
+    index: 2,
     icon: <Funnel size={26} />,
     title: "Query",
   },

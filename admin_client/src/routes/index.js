@@ -31,9 +31,9 @@ export default function Router() {
       children: [
         { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
                 { path: "home", element: <HomeApp /> },
+                { path: "generate_pdf/*", element: <PDFViewerPage /> },
                 { path: "404", element: <Page404 /> },
-        //         { path: "enrollment", element: <EnrollmentPage /> },
-        //         { path: "documents", element: <DocumentPage /> },
+        //         { path: "query", element: <DocumentPage /> },
         //         { path: "contact", element: <ContactPage /> },
         //         { path: "q&a", element: <QuoraPage /> },
         //         { path: "settings", element: <SettingsPage /> },
@@ -46,6 +46,7 @@ export default function Router() {
 
 const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
 const HomeApp = Loadable(lazy(() => import("../pages/dashboard/dashboard")));
+const PDFViewerPage = Loadable(lazy(() => import("../pages/dashboard/PdfViewer")));
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));
 // const RegisterPage = Loadable(
 //     lazy(() => import("../pages/auth/Register")),

@@ -2,7 +2,8 @@ import { Button } from "@mui/material";
 import { Space, Table } from "antd";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FetchStudents } from "../redux/slices/app";
+import { FetchStudents, UpdateSidebarTab } from "../redux/slices/app";
+import { useNavigate } from "react-router-dom";
 
 const MainTable = ({ handleClickAction }) => {
   const dispatch = useDispatch();
@@ -67,7 +68,7 @@ const MainTable = ({ handleClickAction }) => {
             <Button
               variant="outlined"
               size="medium"
-              // onClick={() => handleClickAction(record.studentId, false)}
+              onClick={() => handlePrint(record.studentId)}
             >
               <Space>Print</Space>
             </Button>
@@ -84,9 +85,17 @@ const MainTable = ({ handleClickAction }) => {
     },
   ];
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     dispatch(FetchStudents());
   }, []);
+
+  const handlePrint = (studentId) => {
+    console.log(studentId);
+    dispatch(UpdateSidebarTab(1));
+    navigate(`/generate_pdf/${studentId}`)
+  }
 
   useEffect(() => {
     const filteredStudents = students?.filter(
