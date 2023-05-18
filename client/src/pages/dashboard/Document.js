@@ -241,8 +241,8 @@ const Document = () => {
           <TabContent
             title={doc.docName}
             desc={doc.docDesc}
-            tmpDL={doc.docType === "template" ? doc.docUrl : ""}
-            SmpDL={doc.docType === "sample" ? doc.docUrl : ""}
+            tmpDL={doc.docType.template ? doc.docType.template : ""}
+            SmpDL={doc.docType.sample ? doc.docType.sample : ""}
           />
         ),
       };

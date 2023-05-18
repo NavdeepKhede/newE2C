@@ -1,7 +1,7 @@
 import { Box, IconButton, Stack, Typography, useTheme } from "@mui/material";
 import { CaretLeft, DownloadSimple, TrashSimple } from "phosphor-react";
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UpdateSettingsType } from "../../redux/slices/settings";
 
 const DocList = [
@@ -48,11 +48,12 @@ const DocList = [
 ];
 const SavedDocument = () => {
   const theme = useTheme();
+  const { documents } = useSelector((state) => state.app.student);
 
   return (
     <>
-      {DocList &&
-        DocList.map((document, idx) => (
+      {documents &&
+        documents.map((document, idx) => (
           <Box
             sx={{
               backgroundColor: (theme) => theme.palette.background.paper,
@@ -60,7 +61,7 @@ const SavedDocument = () => {
               boxShadow: "0 0 2.5px rgba(0, 0, 0, 0.15)",
             }}
             p={1}
-            key={document.id}
+            key={document._id}
           >
             <Stack alignItems="flex-start" spacing={1}>
               <Stack spacing={1} direction="row" alignItems="center">
@@ -75,7 +76,7 @@ const SavedDocument = () => {
                   component="div"
                   sx={{ width: "100%" }}
                 >
-                  {document.name}
+                  {document.docName}
                 </Typography>
               </Stack>
               <Stack
@@ -100,6 +101,9 @@ const SavedDocument = () => {
                       backgroundColor: theme.palette.primary.lighter,
                     },
                   }}
+                  href={document.docUrl}
+                  download={true}
+                  target="_blank"
                 >
                   <DownloadSimple
                     color={theme.palette.primary.main}

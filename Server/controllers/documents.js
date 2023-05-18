@@ -4,7 +4,7 @@ import Student from "../models/Student.js";
 export const getBaseDocs = async (req, res) => {
   try {
     const documents = await Document.find({
-      $or: [{ docType: "template" }, { docType: "sample" }],
+      $or: [{ docUrl: "" }],
     });
 
     res.status(200).json({
@@ -35,7 +35,7 @@ export const uploadDoc = async (req, res) => {
 
     const doc = await Document.find(query);
 
-    console.log(doc)
+    console.log(doc);
 
     if (doc.length != 0) {
       return res.status(400).json({
@@ -51,8 +51,11 @@ export const uploadDoc = async (req, res) => {
       docUser: userId,
     });
 
-    const document = await newDoc.save();
-    
+    user.documents = [...user.documents, newDoc._id];
+
+    await newDoc.save();
+    await user.save();
+
     res.status(201).json({
       status: "success",
       message: "Document saved successfully!",

@@ -219,6 +219,15 @@ const StudentSchema = new mongoose.Schema(
     verified: {
       type: Boolean,
       default: false,
+    },
+    generalDetails: {
+      about: {
+        type: String,
+      },
+      designation: {
+        type: String,
+        default: "College Student"
+      }
     }
   },
   { timestamps: true }

@@ -59,10 +59,10 @@ export const closeSnackbar = () => async (dispatch, getState) => {
   dispatch(slice.actions.closeSnackbar());
 };
 
-export const FetchStudent = () => {
+export const FetchStudent = ({studentId}) => {
   return async (dispatch, getState) => {
     await axios
-      .get("/students", {
+      .get(`/students/${studentId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${getState().auth.token}`,

@@ -4,14 +4,13 @@ import { useForm } from "react-hook-form";
 import { Link as RouterLink } from "react-router-dom";
 import { yupResolver } from "@hookform/resolvers/yup";
 import FormProvider from "../../components/hook-form/FormProvider";
-import {
-  Alert,
-  Button,
-  Stack,
-} from "@mui/material";
+import { Alert, Button, Stack } from "@mui/material";
 import { RHFTextField } from "../../components/hook-form";
+import { useSelector } from "react-redux";
 
 const ProfileForm = () => {
+  const { student } = useSelector((state) => state.app);
+
   const ProfileSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     about: Yup.string().required("About is required"),
@@ -19,7 +18,7 @@ const ProfileForm = () => {
   });
 
   const defaultValues = {
-    name: "",
+    name: student ? student.name : "",
     about: "",
   };
 
@@ -31,7 +30,6 @@ const ProfileForm = () => {
   const {
     reset,
     watch,
-    control,
     setError,
     setValue,
     handleSubmit,
@@ -81,15 +79,10 @@ const ProfileForm = () => {
             label="Name"
             helperText={"This name is visible to your contacts"}
           />
-          <RHFTextField
-            multiline
-            rows={5}
-            name="about"
-            label="About"
-          />
+          <RHFTextField multiline rows={5} name="about" label="About" />
         </Stack>
         <Stack direction="row" justifyContent="end">
-          <Button color="primary" size="large" type="submit" variant="outlined">
+          <Button color="primary" size="large" type="submit" variant="outlined" disabled={isSubmitting} >
             Save
           </Button>
         </Stack>

@@ -900,6 +900,7 @@ const EnrollmentForm = () => {
                   <RHFTextField
                     name="degree[0].name"
                     label="Educational Qualification"
+                    defaultValues="High School"
                     sx={{ minWidth: "240px", maxWidth: "320px" }}
                   />
                   <RHFTextField

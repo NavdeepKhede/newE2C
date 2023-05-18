@@ -9,6 +9,9 @@ import {
   SignOut,
   User,
 } from "phosphor-react";
+import NK from "../assets/Images/team-member1.jpg";
+import AL from "../assets/Images/team-member2.jpg";
+import VB from "../assets/Images/team-member4.jpeg";
 
 const Profile_Menu = [
   {
@@ -40,8 +43,8 @@ const Nav_Buttons = [
   },
   {
     index: 3,
-    icon: <ChatCircleDots />
-  }
+    icon: <ChatCircleDots />,
+  },
 ];
 
 const Nav_Setting = [
@@ -55,12 +58,12 @@ const TeamMember = [
   {
     id: 0,
     name: "Navdeep Khede",
-    image: faker.image.avatar(),
+    image: NK,
   },
   {
     id: 1,
     name: "Vivek Barnwal",
-    image: faker.image.avatar(),
+    image: VB,
   },
   {
     id: 2,
@@ -70,13 +73,8 @@ const TeamMember = [
   {
     id: 3,
     name: "Alok Ranjan",
-    image: faker.image.avatar(),
+    image: AL,
   },
 ];
 
-export {
-  Profile_Menu,
-  Nav_Setting,
-  Nav_Buttons,
-  TeamMember,
-};
+export { Profile_Menu, Nav_Setting, Nav_Buttons, TeamMember };

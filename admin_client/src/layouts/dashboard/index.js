@@ -13,7 +13,7 @@ const DashboardLayout = () => {
   }
 
   return (
-    <Stack direction={"row"}>
+    <Stack direction={"row"} >
       <Sidebar />
       <Outlet />
     </Stack>

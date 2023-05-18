@@ -6,6 +6,7 @@ import {
   Menu,
   MenuItem,
   Stack,
+  Tooltip,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import AntSwitch from "../../components/AntSwitch";
@@ -14,12 +15,13 @@ import { useTheme } from "@mui/material/styles";
 
 import Logo from "../../assets/Images/logoV3.png";
 import { Nav_Buttons, Profile_Menu } from "../../data";
-import { Gear } from "phosphor-react";
+import { Gear, SignOut } from "phosphor-react";
 import { faker } from "@faker-js/faker";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UpdateSidebarTab } from "../../redux/slices/app";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "../../redux/slices/auth";
+import { UpdateSettingsType } from "../../redux/slices/settings";
 
 const getPath = (index) => {
   switch (index) {
@@ -57,6 +59,7 @@ const getPath = (index) => {
 const SideBar = () => {
   const dispatch = useDispatch();
   const sidebarTab = useSelector((state) => state.app.sidebarTab);
+  const { isLoggedIn, registrationStatus } = useSelector((state) => state.auth);
   const theme = useTheme();
 
   const navigate = useNavigate();
@@ -75,7 +78,6 @@ const SideBar = () => {
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
-    console.log(anchorEl);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -86,14 +88,21 @@ const SideBar = () => {
   }, [sidebarTab]);
 
   const handleMenu0 = () => {
-    console.log("hii handle 0");
+    setAnchorEl(null);
+    dispatch(UpdateSettingsType("MENU"));
+    navigate("/settings");
   };
   const handleMenu1 = () => {
-    console.log("hii handle 1");
+    setAnchorEl(null);
+    dispatch(UpdateSettingsType("PROFILE"));
+    navigate("/settings");
   };
   const handleMenu2 = () => {
+    setAnchorEl(null);
     dispatch(LogoutUser());
-    <Navigate to="/home" />;
+    setSelected(0);
+    dispatch(UpdateSidebarTab(0));
+    navigate("/home");
   };
 
   const getMenuFunction = (index) => {
@@ -179,34 +188,36 @@ const SideBar = () => {
             )}
 
             <Divider sx={{ width: "48px" }} />
-            {selected === 4 ? (
-              <Box
-                // p={1}
-                sx={{
-                  backgroundColor: theme.palette.primary.main,
-                  borderRadius: 1.5,
-                }}
-              >
-                <IconButton sx={{ width: "max-content", color: "#fff" }}>
+            {isLoggedIn && registrationStatus ? (
+              selected === 4 ? (
+                <Box
+                  // p={1}
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    borderRadius: 1.5,
+                  }}
+                >
+                  <IconButton sx={{ width: "max-content", color: "#fff" }}>
+                    <Gear />
+                  </IconButton>
+                </Box>
+              ) : (
+                <IconButton
+                  onClick={() => {
+                    handleChangeTab(4);
+                  }}
+                  sx={{
+                    width: "max-content",
+                    color:
+                      theme.palette.mode === "light"
+                        ? "#000"
+                        : theme.palette.text.primary,
+                  }}
+                >
                   <Gear />
                 </IconButton>
-              </Box>
-            ) : (
-              <IconButton
-                onClick={() => {
-                  handleChangeTab(4);
-                }}
-                sx={{
-                  width: "max-content",
-                  color:
-                    theme.palette.mode === "light"
-                      ? "#000"
-                      : theme.palette.text.primary,
-                }}
-              >
-                <Gear />
-              </IconButton>
-            )}
+              )
+            ) : null}
           </Stack>
         </Stack>
 
@@ -217,52 +228,67 @@ const SideBar = () => {
             }}
             defaultChecked
           />
-          <Avatar
-            id="basic-button"
-            aria-controls={open ? "basic-menu" : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? "true" : undefined}
-            onClick={handleClick}
-            src={faker.image.avatar()}
-          />
-          <Menu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={open}
-            onClose={handleClose}
-            MenuListProps={{
-              "aria-labelledby": "basic-button",
-            }}
-            anchorOrigin={{
-              vertical: "bottom",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "bottom",
-              horizontal: "left",
-            }}
-          >
-            <Stack spacing={1} px={1}>
-              {Profile_Menu.map((el, idx) => (
-                <MenuItem
-                  key={idx}
-                  onClick={() => {
-                    getMenuFunction(idx);
-                  }}
-                >
-                  <Stack
-                    sx={{ width: 100 }}
-                    direction="row"
-                    alignItems={"center"}
-                    justifyContent="space-between"
-                  >
-                    <span>{el.title}</span>
-                    {el.icon}
-                  </Stack>
-                </MenuItem>
-              ))}
-            </Stack>
-          </Menu>
+          {isLoggedIn && registrationStatus ? (
+            <>
+              <Avatar
+                id="basic-button"
+                aria-controls={open ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
+                onClick={handleClick}
+                src={faker.image.avatar()}
+              />
+              <Menu
+                id="basic-menu"
+                anchorEl={anchorEl}
+                open={open}
+                onClose={handleClose}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "right",
+                }}
+                transformOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                <Stack spacing={1} px={1}>
+                  {Profile_Menu.map((el, idx) => (
+                    <MenuItem
+                      key={idx}
+                      onClick={() => {
+                        getMenuFunction(idx);
+                      }}
+                    >
+                      <Stack
+                        sx={{ width: 100 }}
+                        direction="row"
+                        alignItems={"center"}
+                        justifyContent="space-between"
+                      >
+                        <span>{el.title}</span>
+                        {el.icon}
+                      </Stack>
+                    </MenuItem>
+                  ))}
+                </Stack>
+              </Menu>
+            </>
+          ) : (
+            <Tooltip
+              title="Log Out"
+              arrow
+              placement="left-start"
+              disableInteractive
+            >
+              <IconButton>
+                <SignOut />
+              </IconButton>
+            </Tooltip>
+          )}
         </Stack>
       </Stack>
     </Box>

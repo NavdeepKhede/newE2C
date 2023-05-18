@@ -1,28 +1,32 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
-const DocumentSchema = new mongoose.Schema({
+const DocumentSchema = new mongoose.Schema(
+  {
     docName: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
     },
     docDesc: {
-        type: String,
+      type: String,
     },
     docUrl: {
-        type: String,
-        required: true,
+      type: String,
     },
     docType: {
+      template: {
         type: String,
-        enum: ['uploaded', 'template', 'sample'],
-        default: "uploaded"
+      },
+      sample: {
+        type: String,
+      },
     },
     docUser: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Student'
+      type: mongoose.Types.ObjectId,
+      ref: "Student",
     },
-
-}, { timestamps: true });
+  },
+  { timestamps: true }
+);
 
 const Document = mongoose.model("Document", DocumentSchema);
 export default Document;

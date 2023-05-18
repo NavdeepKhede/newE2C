@@ -22,7 +22,7 @@ import {
   UserCircle,
 } from "phosphor-react";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { UpdateSettingsType } from "../../redux/slices/settings";
 import ThemeChangeForm from "../../sections/ThemeChangeForm";
 import RHFRadioField from "../hook-form/RHFRadioForm";
@@ -41,18 +41,23 @@ const SelectThemeDialog = ({ open, handleClose }) => {
       aria-describedby="alert-dialog-slide-description"
       fullWidth
     >
-      <DialogTitle >Choose Theme</DialogTitle>
+      <DialogTitle>Choose Theme</DialogTitle>
       <DialogContent>
         <DialogContentText id="alert-dialog-slide-description">
           Select theme option and apply
         </DialogContentText>
-          <ThemeChangeForm />
+        <ThemeChangeForm />
       </DialogContent>
       <DialogActions>
         <Button color="error" variant="text" onClick={handleClose}>
           Close
         </Button>
-        <Button type="submit" color="primary" variant="contained" onClick={handleClose}>
+        <Button
+          type="submit"
+          color="primary"
+          variant="contained"
+          onClick={handleClose}
+        >
           Apply
         </Button>
       </DialogActions>
@@ -68,6 +73,7 @@ const Menu = () => {
   };
 
   const dispatch = useDispatch();
+  const { student } = useSelector((state) => state.app);
 
   const list = [
     {
@@ -109,12 +115,12 @@ const Menu = () => {
       <Stack direction={"row"} alignItems="center" spacing={3}>
         <Avatar
           sx={{ width: 56, height: 56 }}
-          src={faker.image.avatar()}
-          alt={faker.name.fullName()}
+          src={student?.picture}
+          alt={student?.name}
         />
         <Stack spacing={0.5}>
-          <Typography variant="article">{faker.name.fullName()}</Typography>
-          <Typography variant="body2">{faker.random.words()}</Typography>
+          <Typography variant="article">{student?.name}</Typography>
+          <Typography variant="body2">{student?.generalDetails?.designation}</Typography>
         </Stack>
       </Stack>
       {/* List of options */}

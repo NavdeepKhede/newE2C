@@ -16,7 +16,7 @@ const Settings = () => {
       <Stack direction={"row"} sx={{ width: "100%" }}>
         <Box
           sx={{
-            overflowY: "scroll",
+            overflowY: "auto",
             height: "100vh",
             width: 320,
             backgroundColor:
