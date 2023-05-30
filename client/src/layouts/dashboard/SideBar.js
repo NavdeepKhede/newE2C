@@ -60,6 +60,7 @@ const SideBar = () => {
   const dispatch = useDispatch();
   const sidebarTab = useSelector((state) => state.app.sidebarTab);
   const { isLoggedIn, registrationStatus } = useSelector((state) => state.auth);
+  const { student } = useSelector((state) => state.app);
   const theme = useTheme();
 
   const navigate = useNavigate();
@@ -254,7 +255,8 @@ const SideBar = () => {
                 aria-haspopup="true"
                 aria-expanded={open ? "true" : undefined}
                 onClick={handleClick}
-                src={faker.image.avatar()}
+                src={student?.picture}
+                alt="studentpic"
               />
               <Menu
                 id="basic-menu"

@@ -59,6 +59,13 @@ export const closeSnackbar = () => async (dispatch, getState) => {
   dispatch(slice.actions.closeSnackbar());
 };
 
+export const UpdateStudentData = ({data}) => {
+  return async (dispatch, getState) => {
+    console.log(data);
+    dispatch(slice.actions.updateStudent({ data: data }));
+  }
+}
+
 export const FetchStudent = ({studentId}) => {
   return async (dispatch, getState) => {
     await axios
@@ -69,7 +76,6 @@ export const FetchStudent = ({studentId}) => {
         },
       })
       .then((response) => {
-        console.log(response);
         dispatch(slice.actions.updateStudent({ data: response.data.data }));
       })
       .catch((error) => {

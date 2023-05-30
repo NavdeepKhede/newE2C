@@ -88,6 +88,7 @@ const LoginForm = () => {
           size="large"
           type="submit"
           variant="contained"
+          disabled={isSubmitting}
           sx={{
             bgcolor: (theme) => theme.palette.primary.main,
             color: (theme) =>

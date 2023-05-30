@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "../../utils/axios";
-import { FetchStudent, showSnackbar } from "./app";
+import { UpdateStudentData, showSnackbar } from "./app";
 
 const initialState = {
   isLoggedIn: false,
@@ -59,7 +59,7 @@ export function LoginStudent(formValues) {
         { headers: { "Content-Type": "application/json" } }
       )
       .then(function (response) {
-        // console.log(response);
+        console.log(response);
 
         dispatch(
           slice.actions.logIn({
@@ -85,7 +85,7 @@ export function LoginStudent(formValues) {
         );
 
         dispatch(GetBaseDocs());
-        dispatch(FetchStudent({studentId: response.data.data.user_id}))
+        dispatch(UpdateStudentData({ data : response.data.data }));
       })
       .catch(function (error) {
         console.log(error);
@@ -192,7 +192,6 @@ export function GetBaseDocs() {
         },
       })
       .then(function (response) {
-        console.log(response);
         dispatch(
           slice.actions.updateBaseDocuments({
             docs: response.data.data,
