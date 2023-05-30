@@ -10,16 +10,35 @@ import {
 } from "@react-pdf/renderer";
 import Logo from "../../assets/Images/Logo_IIITL.png";
 import Person from "../../assets/Images/logoV3.png";
+import p400 from '../../assets/fonts/PoppinsRegular400.ttf';
+import p500 from '../../assets/fonts/PoppinsMedium500.ttf';
+import p600 from '../../assets/fonts/PoppinsSemiBold600.ttf';
 
 // Register font
 Font.register({
   family: "Poppins",
-  src: "http://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJHedw.ttf/",
+  fonts: [
+    {
+      src: p400,
+      fontStyle: "normal",
+      fontWeight: 400
+    },
+    {
+      src: p500,
+      fontStyle: "normal",
+      fontWeight: 500
+    },
+    {
+      src: p600,
+      fontStyle: "normal",
+      fontWeight: 600
+    },
+  ],
 });
-Font.register({
-  family: "Hindi",
-  src: "http://fonts.gstatic.com/s/notoserifdevanagari/v28/x3dYcl3IZKmUqiMk48ZHXJ5jwU-DZGRSaQ4Hh2dGyFzPLcQPVbnRNeFsw0xRWb6uxTA-oz-GO0M.ttf/",
-});
+// Font.register({
+//   family: "Hindi",
+//   src: "http://fonts.gstatic.com/s/notoserifdevanagari/v28/x3dYcl3IZKmUqiMk48ZHXJ5jwU-DZGRSaQ4Hh2dGyFzPLcQPVbnRNeFsw0xRWb6uxTA-oz-GO0M.ttf/",
+// });
 
 // Create styles
 const styles = StyleSheet.create({
