@@ -14,11 +14,11 @@ import Person from "../../assets/Images/logoV3.png";
 // Register font
 Font.register({
   family: "Poppins",
-  src: "http://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJHedw.ttf",
+  src: "http://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJHedw.ttf/",
 });
 Font.register({
   family: "Hindi",
-  src: "http://fonts.gstatic.com/s/notoserifdevanagari/v28/x3dYcl3IZKmUqiMk48ZHXJ5jwU-DZGRSaQ4Hh2dGyFzPLcQPVbnRNeFsw0xRWb6uxTA-oz-GO0M.ttf",
+  src: "http://fonts.gstatic.com/s/notoserifdevanagari/v28/x3dYcl3IZKmUqiMk48ZHXJ5jwU-DZGRSaQ4Hh2dGyFzPLcQPVbnRNeFsw0xRWb6uxTA-oz-GO0M.ttf/",
 });
 
 // Create styles
