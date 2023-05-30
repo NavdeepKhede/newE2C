@@ -36,7 +36,7 @@ function App() {
         <Snackbar
           anchorOrigin={{ vertical: "top", horizontal: "center" }}
           open={open}
-          autoHideDuration={4000}
+          autoHideDuration={6000}
           key={vertical + horizontal}
           onClose={() => {
             dispatch(closeSnackbar());

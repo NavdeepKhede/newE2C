@@ -402,7 +402,8 @@ const EnrollmentForm = () => {
       if (data.picture) setFile(data.picture);
       console.log(file)
       if (file) {
-        const storageRef = ref(storage, `/files/${file.name}`);
+        let name = data.nameEnglish.split(" ");
+        const storageRef = ref(storage, `/files/${name[0]}`);
         const uploadTask = uploadBytesResumable(storageRef, file);
   
         uploadTask.on(

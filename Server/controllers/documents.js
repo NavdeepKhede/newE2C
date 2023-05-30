@@ -31,7 +31,7 @@ export const uploadDoc = async (req, res) => {
         message: "User doesn't exist!",
       });
 
-    const query = { docType: "uploaded", docName: docName };
+    const query = { docDesc: "uploaded", docName: docName };
 
     const doc = await Document.find(query);
 
@@ -46,7 +46,7 @@ export const uploadDoc = async (req, res) => {
 
     const newDoc = new Document({
       docName,
-      docType: "uploaded",
+      docDesc: "uploaded",
       docUrl,
       docUser: userId,
     });
