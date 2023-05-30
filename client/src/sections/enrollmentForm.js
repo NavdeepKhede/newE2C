@@ -387,31 +387,43 @@ const EnrollmentForm = () => {
     formState: { errors, isSubmitting, isSubmitSuccessful },
   } = methods;
 
+  const [percent, setPercent] = useState(0);
+  const [picUrl, setPicUrl] = useState('');
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+    event.target.defaultValue = file.name;
+    console.log(event)
+  };
+
   const onSubmit = async (data) => {
-    let picUrl = "";
-
-    if (data.picture) {
-      const storageRef = ref(storage, `/files/${data.picture}`);
-      const uploadTask = uploadBytesResumable(storageRef, data.picture);
-
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const percent = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          ); // update progress
-          //   setPercent(percent);
-        },
-        (err) => console.log(err),
-        () => {
-          // download url
-          getDownloadURL(uploadTask.snapshot.ref).then((url) => {
-            picUrl = url;
-          });
-        }
-      );
-    }
     try {
+      if (data.picture) setFile(data.picture);
+      console.log(file)
+      if (file) {
+        const storageRef = ref(storage, `/files/${file.name}`);
+        const uploadTask = uploadBytesResumable(storageRef, file);
+  
+        uploadTask.on(
+          "state_changed",
+          (snapshot) => {
+            const progress = Math.round(
+              (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            ); // update progress
+              setPercent(progress);
+              console.log(percent)
+          },
+          (err) => console.log(err),
+          () => {
+            // download url
+            getDownloadURL(uploadTask.snapshot.ref).then((url) => {
+              setPicUrl(url);
+            });
+          }
+          );
+          console.log(picUrl)
+      }
       // submit data to backend
       const refined_Data = {
         officialDetails: {

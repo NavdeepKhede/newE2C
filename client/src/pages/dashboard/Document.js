@@ -15,6 +15,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import PropTypes from 'prop-types';
 import { Tabs } from "antd";
 import { DownloadSimple, FileText, UploadSimple } from "phosphor-react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +23,7 @@ import { Navigate } from "react-router-dom";
 import { GetBaseDocs, UploadDocument } from "../../redux/slices/auth";
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import storage from "../../firebaseConfig";
+import { showSnackbar } from "../../redux/slices/app";
 // import 'antd/lib/tabs/style';
 
 const TabHeading = ({ index, title, desc }) => {
@@ -68,6 +70,7 @@ const TabContent = ({ title, desc, tmpDL, SmpDL }) => {
   const [open, setOpen] = useState(false);
   const [file, setFile] = useState(null);
   const [URL, setURL] = useState("");
+  const [percent, setPercent] = useState(0);
 
   const dispatch = useDispatch();
 
@@ -87,9 +90,11 @@ const TabContent = ({ title, desc, tmpDL, SmpDL }) => {
         const progress =
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         console.log(`Upload progress: ${progress}%`);
+        setPercent(progress);
       },
       (error) => {
         console.error(error);
+        dispatch(showSnackbar("error", error.message))
       },
       () => {
         // Once the file is uploaded, get the download URL and save it to MongoDB
@@ -111,6 +116,29 @@ const TabContent = ({ title, desc, tmpDL, SmpDL }) => {
   };
   const handleCloseUpload = () => {
     setOpen(false);
+  };
+
+  function LinearProgressWithLabel(props) {
+    return (
+      <Box sx={{ display: 'flex', alignItems: 'center' }}>
+        <Box sx={{ width: '100%', mr: 1 }}>
+          <LinearProgress variant="determinate" {...props} />
+        </Box>
+        <Box sx={{ minWidth: 35 }}>
+          <Typography variant="body2" color="text.secondary">{`${Math.round(
+            props.value,
+          )}%`}</Typography>
+        </Box>
+      </Box>
+    );
+  }
+  
+  LinearProgressWithLabel.propTypes = {
+    /**
+     * The value of the progress indicator for the determinate and buffer variants.
+     * Value between 0 and 100.
+     */
+    value: PropTypes.number.isRequired,
   };
 
   return (
@@ -200,13 +228,13 @@ const TabContent = ({ title, desc, tmpDL, SmpDL }) => {
           <DialogContentText>Please select a file to upload.</DialogContentText>
           <FormControl fullWidth sx={{ marginTop: "26px" }}>
             {/* <InputLabel htmlFor="upload-file">File</InputLabel> */}
-            <Input id="upload-file" type="file" onChange={handleFileChange} />
+            <Input id="upload-file" type="file" onChange={handleFileChange} disableUnderline={true} />
           </FormControl>
           {file && (
             <>
-              <LinearProgress />
+              <LinearProgressWithLabel value={percent}  />
               <DialogContentText>
-                {file.name} ({file.type}, {file.size} bytes)
+                ({file.type}, {file.size} bytes)
               </DialogContentText>
             </>
           )}

@@ -95,6 +95,8 @@ export const login = async (req, res) => {
       registrationStatus: student.registrationStatus,
     };
 
+    console.log(filtered_student)
+
     const token = jwt.sign({ id: student._id }, process.env.JWT_SECRET);
 
     res.status(200).json({

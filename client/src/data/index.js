@@ -31,18 +31,22 @@ const Profile_Menu = [
 const Nav_Buttons = [
   {
     index: 0,
+    title: "Home",
     icon: <House />,
   },
   {
     index: 1,
+    title: "Enrollment Form",
     icon: <FilmScript />,
   },
   {
     index: 2,
+    title: "Contact",
     icon: <AddressBook />,
   },
   {
     index: 3,
+    title: "FAQs",
     icon: <ChatCircleDots />,
   },
 ];
@@ -50,6 +54,7 @@ const Nav_Buttons = [
 const Nav_Setting = [
   {
     index: 4,
+    title: "Settings",
     icon: <GearSix />,
   },
 ];

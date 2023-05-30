@@ -147,7 +147,7 @@ const SideBar = () => {
             alignItems="center"
             justifyContent="center"
           >
-            <img width={48} src={Logo} alt={"Chat App Logo"} />
+            <img width={48} src={Logo} alt={"E2CLogo"} />
           </Stack>
           <Stack
             sx={{ width: "max-content" }}
@@ -164,26 +164,38 @@ const SideBar = () => {
                   }}
                   key={el.index}
                 >
-                  <IconButton sx={{ width: "max-content", color: "#fff" }}>
-                    {el.icon}
-                  </IconButton>
+                  <Tooltip
+                    title={el?.title}
+                    placement="left-start"
+                    disableInteractive
+                  >
+                    <IconButton sx={{ width: "max-content", color: "#fff" }}>
+                      {el.icon}
+                    </IconButton>
+                  </Tooltip>
                 </Box>
               ) : (
-                <IconButton
-                  onClick={() => {
-                    handleChangeTab(el.index);
-                  }}
-                  sx={{
-                    width: "max-content",
-                    color:
-                      theme.palette.mode === "light"
-                        ? "#000"
-                        : theme.palette.text.primary,
-                  }}
-                  key={el.index}
+                <Tooltip
+                  title={el?.title}
+                  placement="left-start"
+                  disableInteractive
                 >
-                  {el.icon}
-                </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      handleChangeTab(el.index);
+                    }}
+                    sx={{
+                      width: "max-content",
+                      color:
+                        theme.palette.mode === "light"
+                          ? "#000"
+                          : theme.palette.text.primary,
+                    }}
+                    key={el.index}
+                  >
+                    {el.icon}
+                  </IconButton>
+                </Tooltip>
               )
             )}
 
@@ -202,20 +214,26 @@ const SideBar = () => {
                   </IconButton>
                 </Box>
               ) : (
-                <IconButton
-                  onClick={() => {
-                    handleChangeTab(4);
-                  }}
-                  sx={{
-                    width: "max-content",
-                    color:
-                      theme.palette.mode === "light"
-                        ? "#000"
-                        : theme.palette.text.primary,
-                  }}
+                <Tooltip
+                  title="Settings"
+                  placement="left-start"
+                  disableInteractive
                 >
-                  <Gear />
-                </IconButton>
+                  <IconButton
+                    onClick={() => {
+                      handleChangeTab(4);
+                    }}
+                    sx={{
+                      width: "max-content",
+                      color:
+                        theme.palette.mode === "light"
+                          ? "#000"
+                          : theme.palette.text.primary,
+                    }}
+                  >
+                    <Gear />
+                  </IconButton>
+                </Tooltip>
               )
             ) : null}
           </Stack>
@@ -277,17 +295,19 @@ const SideBar = () => {
                 </Stack>
               </Menu>
             </>
-          ) : (
+          ) : isLoggedIn ? (
             <Tooltip
               title="Log Out"
               arrow
               placement="left-start"
               disableInteractive
             >
-              <IconButton>
+              <IconButton onClick={handleMenu2}>
                 <SignOut />
               </IconButton>
             </Tooltip>
+          ) : (
+            ""
           )}
         </Stack>
       </Stack>
