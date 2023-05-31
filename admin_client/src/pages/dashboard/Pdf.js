@@ -10,9 +10,9 @@ import {
 } from "@react-pdf/renderer";
 import Logo from "../../assets/Images/Logo_IIITL.png";
 import Person from "../../assets/Images/logoV3.png";
-import p400 from '../../assets/fonts/PoppinsRegular400.ttf';
-import p500 from '../../assets/fonts/PoppinsMedium500.ttf';
-import p600 from '../../assets/fonts/PoppinsSemiBold600.ttf';
+import p400 from "../../assets/fonts/PoppinsRegular400.ttf";
+import p500 from "../../assets/fonts/PoppinsMedium500.ttf";
+import p600 from "../../assets/fonts/PoppinsSemiBold600.ttf";
 
 // Register font
 Font.register({
@@ -21,17 +21,17 @@ Font.register({
     {
       src: p400,
       fontStyle: "normal",
-      fontWeight: 400
+      fontWeight: 400,
     },
     {
       src: p500,
       fontStyle: "normal",
-      fontWeight: 500
+      fontWeight: 500,
     },
     {
       src: p600,
       fontStyle: "normal",
-      fontWeight: 600
+      fontWeight: 600,
     },
   ],
 });
@@ -87,6 +87,7 @@ const styles = StyleSheet.create({
     width: "11.22%",
     borderRight: "1px solid #000",
     padding: 8,
+    flexWrap: "wrap",
   },
   row3: {
     width: "16.88%",
@@ -139,7 +140,7 @@ const Pdf = ({ data }) => (
             paddingVertical: "25px",
           }}
         >
-          <Text style={{ textAlign: "center" }}>
+          <Text style={{ textAlign: "center", fontSize: "17px" }}>
             Indian Institute of Information Technology, Lucknow
           </Text>
           {/* <Text style={{ textAlign: "center", fontFamily: "Hindi"}} >भारतीय सूचना प्रौद्योगिकी संस्थान, लखनऊ </Text> */}
@@ -153,16 +154,24 @@ const Pdf = ({ data }) => (
       <View
         style={{
           marginHorizontal: 10,
-          fontWeight: 600,
+          fontWeight: 500,
           fontSize: 14,
           textAlign: "center",
         }}
       >
-        <Text>B.Tech.(IT), (CS), (CSAI) & (CSB) Registration Cum Enrollment Form 2023</Text>
+        <Text>
+          B.Tech.(IT), (CS), (CSAI) & (CSB) Registration Cum Enrollment Form
+          2023
+        </Text>
       </View>
       <View style={{ position: "absolute", top: 175, right: 15 }}>
         <Image
-          src={`${data?.personalDetails.picture ? data?.personalDetails.picture : Person}`}
+          src={
+            data?.personalDetails?.picture
+              ? `${data.personalDetails.picture}`
+              : Person
+          }
+          alt="studentpicture"
           style={{ width: "108px" }}
         />
       </View>
@@ -189,9 +198,19 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>Enrollment No.: ...............</Text>
-        <Text>{`Program Name: ${data?.officialDetails.programName}`}</Text>
-        <Text>{`Batch of Year: ${data?.officialDetails.batchOfYear}`}</Text>
+        <Text>Enrollment No.: <Text style={{color: "#009", fontSize: 11}} >...............</Text></Text>
+        <Text>
+          {`Program Name: `}
+          <Text style={{ color: "#009", fontSize: 11 }}>
+            {data?.officialDetails.programName}
+          </Text>
+        </Text>
+        <Text>
+          {`Batch of Year: `}
+          <Text style={{ color: "#009", fontSize: 11 }}>
+            {data?.officialDetails.batchOfYear}
+          </Text>
+        </Text>
       </View>
 
       <View
@@ -217,12 +236,19 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Student Name: ${data?.personalDetails.studentName.inEnglish}`}</Text>
-        <Text>{`Date of Birth: ${data?.personalDetails.dob.slice(
-          0,
-          10
-        )}`}</Text>
-        <Text>{`Gender: ${data?.personalDetails.gender}`}</Text>
+        <Text>
+          {`Student Name: `}
+          <Text style={{ color: "#009", fontSize: 11 }}>
+            {data?.personalDetails.studentName.inEnglish}
+          </Text>
+        </Text>
+        <Text>
+          {`Date of Birth: `}
+          <Text style={{ color: "#009", fontSize: 11 }}>
+            {data?.personalDetails.dob.slice(0, 10)}
+          </Text>
+        </Text>
+        <Text>{`Gender: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.gender}</Text></Text>
       </View>
       <View
         style={{
@@ -236,10 +262,10 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Blood Group: ${data?.personalDetails.bloodGroup}`}</Text>
-        <Text>{`PWD: ${data?.personalDetails.pwd}`}</Text>
-        <Text>{`Category: ${data?.personalDetails.category}`}</Text>
-        <Text>{`Religion: ${data?.personalDetails.religion}`}</Text>
+        <Text>{`Blood Group: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.bloodGroup}</Text></Text>
+        <Text>{`PWD: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.pwd ? "Yes" : "No"}</Text></Text>
+        <Text>{`Category: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.category}</Text></Text>
+        <Text>{`Religion: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.religion}</Text></Text>
       </View>
       <View
         style={{
@@ -253,9 +279,9 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Aadhaar No.: ${data?.personalDetails.aadhaarNum}`}</Text>
-        <Text>{`Marital Status: ${data?.personalDetails.maritalStatus}`}</Text>
-        <Text>{`Nationality: ${data?.personalDetails.nationality}`}</Text>
+        <Text>{`Aadhaar No.: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.aadhaarNum}</Text></Text>
+        <Text>{`Marital Status: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.maritalStatus}</Text></Text>
+        <Text>{`Nationality: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.nationality}</Text></Text>
       </View>
       <View
         style={{
@@ -269,15 +295,15 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Phone Number: ${data?.personalDetails.phoneNum}`}</Text>
-        <Text>{`Email: ${data?.personalDetails.emailId}`}</Text>
-        <Text>{`Hobbies: ${data?.personalDetails.hobbies}`}</Text>
+        <Text>{`Phone Number: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.phoneNum}</Text></Text>
+        <Text>{`Email: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.emailId}</Text></Text>
+        <Text>{`Hobbies: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.hobbies}</Text></Text>
       </View>
       <View
         style={{
           ...styles.section2,
           paddingBottom: 0,
-          fontSize: 13,
+          fontSize: 12,
           fontWeight: 600,
         }}
       >
@@ -294,11 +320,11 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Roll No.: ${data?.personalDetails.gateExam.rollNum}`}</Text>
-        <Text>{`Score: ${data?.personalDetails.gateExam.score}`}</Text>
-        <Text>{`Rank: ${data?.personalDetails.gateExam.rank}`}</Text>
-        <Text>{`Year: ${data?.personalDetails.gateExam.year}`}</Text>
-        <Text>{`Branch: ${data?.personalDetails.gateExam.branch}`}</Text>
+        <Text>{`Roll No.: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.gateExam.rollNum}</Text></Text>
+        <Text>{`Score: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.gateExam.score}</Text></Text>
+        <Text>{`Rank: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.gateExam.rank}</Text></Text>
+        <Text>{`Year: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.gateExam.year}</Text></Text>
+        <Text>{`Branch: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.gateExam.branch}</Text></Text>
       </View>
 
       <View
@@ -312,10 +338,10 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Communication Address: ${data?.personalDetails.communAddress.address}`}</Text>
-        <Text>{`District: ${data?.personalDetails.communAddress.district}`}</Text>
-        <Text>{`State: ${data?.personalDetails.communAddress.state}`}</Text>
-        <Text>{`Pincode: ${data?.personalDetails.communAddress.pincode}`}</Text>
+        <Text>{`Communication Address: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.communAddress.address}</Text></Text>
+        <Text>{`District: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.communAddress.district}</Text></Text>
+        <Text>{`State: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.communAddress.state}</Text></Text>
+        <Text>{`Pincode: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.communAddress.pincode}</Text></Text>
       </View>
 
       <View
@@ -329,10 +355,10 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Permanent Address: ${data?.personalDetails.permanentAddress.address}`}</Text>
-        <Text>{`District: ${data?.personalDetails.permanentAddress.district}`}</Text>
-        <Text>{`State: ${data?.personalDetails.permanentAddress.state}`}</Text>
-        <Text>{`Pincode: ${data?.personalDetails.permanentAddress.pincode}`}</Text>
+        <Text>{`Permanent Address: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.permanentAddress.address}</Text></Text>
+        <Text>{`District: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.permanentAddress.district}</Text></Text>
+        <Text>{`State: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.permanentAddress.state}</Text></Text>
+        <Text>{`Pincode: `}<Text style={{color: "#009", fontSize: 11}} >{data?.personalDetails.permanentAddress.pincode}</Text></Text>
       </View>
       <View
         style={{
@@ -356,11 +382,11 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Father's Name: ${data?.parentsDetails.father.name}`}</Text>
-        <Text>{`Designation: ${data?.parentsDetails.father.designation}`}</Text>
-        <Text>{`Phone No.: ${data?.parentsDetails.father.phoneNum}`}</Text>
-        <Text>{`Email: ${data?.parentsDetails.father.emailId}`}</Text>
-        <Text>{`Address: ${data?.parentsDetails.father.address}`}</Text>
+        <Text>{`Father's Name: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.father.name}</Text></Text>
+        <Text>{`Designation: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.father.designation}</Text></Text>
+        <Text>{`Phone No.: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.father.phoneNum}</Text></Text>
+        <Text>{`Email: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.father.emailId}</Text></Text>
+        <Text>{`Address: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.father.address}</Text></Text>
       </View>
       <View
         style={{
@@ -373,10 +399,10 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Mother's Name: ${data?.parentsDetails.mother.name}`}</Text>
-        <Text>{`Designation: ${data?.parentsDetails.mother.designation}`}</Text>
-        <Text>{`Phone No.: ${data?.parentsDetails.mother.phoneNum}`}</Text>
-        <Text>{`Email: ${data?.parentsDetails.mother.emailId}`}</Text>
+        <Text>{`Mother's Name: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.mother.name}</Text></Text>
+        <Text>{`Designation: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.mother.designation}</Text></Text>
+        <Text>{`Phone No.: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.mother.phoneNum}</Text></Text>
+        <Text>{`Email: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.mother.emailId}</Text></Text>
       </View>
       <View
         style={{
@@ -389,10 +415,10 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>{`Guardian's Name: ${data?.parentsDetails.guardian.name}`}</Text>
-        <Text>{`Phone No.: ${data?.parentsDetails.guardian.phoneNum}`}</Text>
-        <Text>{`Relation: ${data?.parentsDetails.guardian.relation}`}</Text>
-        <Text>{`Address: ${data?.parentsDetails.guardian.address}`}</Text>
+        <Text>{`Guardian's Name: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.guardian.name}</Text></Text>
+        <Text>{`Phone No.: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.guardian.phoneNum}</Text></Text>
+        <Text>{`Relation: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.guardian.relation}</Text></Text>
+        <Text>{`Address: `}<Text style={{color: "#009", fontSize: 11}} >{data?.parentsDetails.guardian.address}</Text></Text>
       </View>
 
       <View
@@ -433,11 +459,21 @@ const Pdf = ({ data }) => (
           <Text style={styles.row4}>
             {`${data?.academicDetails.degree[0].year}`}
           </Text>
-          <Text style={styles.row5}>{`${data?.academicDetails.degree[0].division}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[0].marks}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[0].totalMarks}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[0].grade}`}</Text>
-          <Text style={styles.row7}>{`${data?.academicDetails.degree[0].degreeNum}`}</Text>
+          <Text
+            style={styles.row5}
+          >{`${data?.academicDetails.degree[0].division}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[0].marks}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[0].totalMarks}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[0].grade}`}</Text>
+          <Text
+            style={styles.row7}
+          >{`${data?.academicDetails.degree[0].degreeNum}`}</Text>
         </View>
         <View style={styles.row} wrap={false}>
           <Text style={styles.row1}>
@@ -452,11 +488,21 @@ const Pdf = ({ data }) => (
           <Text style={styles.row4}>
             {`${data?.academicDetails.degree[1].year}`}
           </Text>
-          <Text style={styles.row5}>{`${data?.academicDetails.degree[1].division}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[1].marks}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[1].totalMarks}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[1].grade}`}</Text>
-          <Text style={styles.row7}>{`${data?.academicDetails.degree[1].degreeNum}`}</Text>
+          <Text
+            style={styles.row5}
+          >{`${data?.academicDetails.degree[1].division}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[1].marks}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[1].totalMarks}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[1].grade}`}</Text>
+          <Text
+            style={styles.row7}
+          >{`${data?.academicDetails.degree[1].degreeNum}`}</Text>
         </View>
         <View style={styles.row} wrap={false}>
           <Text style={styles.row1}>
@@ -471,11 +517,21 @@ const Pdf = ({ data }) => (
           <Text style={styles.row4}>
             {`${data?.academicDetails.degree[2].year}`}
           </Text>
-          <Text style={styles.row5}>{`${data?.academicDetails.degree[2].division}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[2].marks}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[2].totalMarks}`}</Text>
-          <Text style={styles.row6}>{`${data?.academicDetails.degree[2].grade}`}</Text>
-          <Text style={styles.row7}>{`${data?.academicDetails.degree[2].degreeNum}`}</Text>
+          <Text
+            style={styles.row5}
+          >{`${data?.academicDetails.degree[2].division}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[2].marks}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[2].totalMarks}`}</Text>
+          <Text
+            style={styles.row6}
+          >{`${data?.academicDetails.degree[2].grade}`}</Text>
+          <Text
+            style={styles.row7}
+          >{`${data?.academicDetails.degree[2].degreeNum}`}</Text>
         </View>
       </View>
       <View
@@ -484,10 +540,10 @@ const Pdf = ({ data }) => (
           display: "flex",
           flexDirection: "row",
           justifyContent: "space-between",
-          alignItemsrun : "center",
+          alignItemsrun: "center",
           flexWrap: "wrap",
           fontSize: 12,
-          paddingVertical: 5
+          paddingVertical: 5,
         }}
       >
         <Text>Student Sign.: ...............</Text>

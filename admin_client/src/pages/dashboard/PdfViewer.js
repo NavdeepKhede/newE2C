@@ -32,6 +32,7 @@ const PdfViewer = () => {
     setData(filteredStudent[0])
   }, []);
 
+
   return (
     <PDFViewer
       showToolbar={true}
