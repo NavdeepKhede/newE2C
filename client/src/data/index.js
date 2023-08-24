@@ -12,6 +12,7 @@ import {
 import NK from "../assets/Images/team-member1.jpg";
 import AL from "../assets/Images/team-member2.jpg";
 import VB from "../assets/Images/team-member4.jpeg";
+import RA from "../assets/Images/team-member5.jpeg";
 
 const Profile_Menu = [
   {
@@ -79,6 +80,11 @@ const TeamMember = [
     id: 3,
     name: "Alok Ranjan",
     image: AL,
+  },
+  {
+    id: 4,
+    name: "Rohan Agarwal",
+    image: RA,
   },
 ];
 

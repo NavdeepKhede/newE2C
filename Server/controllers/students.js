@@ -1,5 +1,6 @@
 import Student from "../models/Student.js";
 import Document from "../models/Document.js";
+import { generateEnrollmentNumber } from "./enrollment.js";
 
 export const getStudentDetails = async (req, res) => {
   try {
@@ -116,6 +117,11 @@ export const updateDetails = async (req, res) => {
       validateModifiedOnly: true,
     });
 
+    // TODO: get branch name with formData and also add a field of branch in student schema
+    // branchName : ["LCI", "LCS", "LIT", "LCB", etc...]
+    const enrollmentNumber = generateEnrollmentNumber("LCI");
+
+    updated_student.officialDetails.enrollmentNum = enrollmentNumber;
     updated_student.registrationStatus = true;
     updated_student.verified = false;
     updated_student.save();
