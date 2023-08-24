@@ -1,4 +1,4 @@
-import Enrollment from "../models/Enrollment";
+import Enrollment from "../models/Enrollment.js";
 
 export const generateEnrollmentNumber = async (branchName) => {
   const currentYear = new Date().getFullYear();
