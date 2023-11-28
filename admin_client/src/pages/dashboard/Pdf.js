@@ -198,7 +198,7 @@ const Pdf = ({ data }) => (
           fontSize: 12,
         }}
       >
-        <Text>Enrollment No.: <Text style={{color: "#009", fontSize: 11}} >...............</Text></Text>
+        <Text>Enrollment No.: <Text style={{color: "#009", fontSize: 11}} >{data?.officialDetails?.enrollmentNum}</Text></Text>
         <Text>
           {`Program Name: `}
           <Text style={{ color: "#009", fontSize: 11 }}>

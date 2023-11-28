@@ -81,11 +81,11 @@ const TeamMember = [
     name: "Alok Ranjan",
     image: AL,
   },
-  {
-    id: 4,
-    name: "Rohan Agarwal",
-    image: RA,
-  },
+  // {
+  //   id: 4,
+  //   name: "Rohan Agarwal",
+  //   image: RA,
+  // },
 ];
 
 export { Profile_Menu, Nav_Setting, Nav_Buttons, TeamMember };

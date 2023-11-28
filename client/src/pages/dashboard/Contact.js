@@ -43,7 +43,7 @@ const Contact = () => {
           >
             <ContactForm />
           </Box>
-          <img src={ContactImg} alt="Contact" />
+          <img src={ContactImg} alt="Contact" width={280} />
         </Stack>
       </Stack>
     </Box>

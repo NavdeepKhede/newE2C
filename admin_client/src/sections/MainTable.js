@@ -92,7 +92,6 @@ const MainTable = ({ handleClickAction }) => {
   }, []);
 
   const handlePrint = (studentId) => {
-    console.log(studentId);
     dispatch(UpdateSidebarTab(1));
     navigate(`/generate_pdf/${studentId}`)
   }
@@ -121,7 +120,7 @@ const MainTable = ({ handleClickAction }) => {
   };
   return (
     <>
-      {data.length !== 0 && (
+      {data && data.length !== 0 && (
         <Table
           size="large"
           loading={data ? false : true}
