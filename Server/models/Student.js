@@ -5,6 +5,7 @@ const StudentSchema = new mongoose.Schema(
     officialDetails: {
       enrollmentNum: {
         type: String,
+        default: ""
       },
       programName: {
         type: String,

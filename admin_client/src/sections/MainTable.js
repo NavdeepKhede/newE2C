@@ -98,17 +98,17 @@ const MainTable = ({ handleClickAction }) => {
 
   useEffect(() => {
     const filteredStudents = students?.filter(
-      (student) => student.registrationStatus
+      (student) => student?.registrationStatus
     );
 
     setData(
       filteredStudents?.map((stu, idx) => {
         return {
-          key: stu._id,
-          name: stu.personalDetails.studentName.inEnglish,
-          studentId: stu._id,
-          registration: `${stu.registrationStatus}`,
-          verified: `${stu.verified}`,
+          key: stu?._id,
+          name: stu?.personalDetails?.studentName?.inEnglish,
+          studentId: stu?._id,
+          registration: `${stu?.registrationStatus}`,
+          verified: `${stu?.verified}`,
         };
       })
     );
